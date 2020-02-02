@@ -17,14 +17,17 @@ function playerBase:update(dt)
   self.mousey = love.mouse.getY()/scale
   print (self.mousex, self.mousey)
   self.angle = findRotation(self.x,self.y,self.mousex,self.mousey)
-end
-
-function playerBase:keyPressed(key)
-  if key == "space" then
+  if input:pressed('launch') then 
     table.insert (listOfMissiles, playerMissile(self.x + 2*self.w*math.cos(self.angle), self.y + 2*self.w*math.sin(self.angle), self.angle))
-    print (listOfMissiles[1])
   end
 end
+
+--function playerBase:keyPressed(key)
+--  if key == "space" then
+--    table.insert (listOfMissiles, playerMissile(self.x + 2*self.w*math.cos(self.angle), self.y + 2*self.w*math.sin(self.angle), self.angle))
+--    --print (listOfMissiles[1])
+--  end
+--end
 
 
 function playerBase:draw()

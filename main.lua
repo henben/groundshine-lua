@@ -6,13 +6,19 @@ scale = 2
 function love.load()
     love.graphics.setDefaultFilter('nearest')
     love.graphics.setLineStyle( 'rough' )
+    
     Object = require "classic"
     require "playerBase"
     require "playerMissile"
+    Input = require 'Input'
+    
     player = playerBase()
     listOfMissiles = {}
     main_canvas = love.graphics.newCanvas(gw, gh)
     resize(scale)
+    
+    input = Input()
+    input:bind('space', 'launch')
 end
 
 function love.update(dt)
@@ -20,10 +26,6 @@ function love.update(dt)
   for i,v in ipairs(listOfMissiles) do
         v:update(dt)
   end
-end
-
-function love.keypressed(key)
-    player:keyPressed(key)
 end
 
 function love.draw()
