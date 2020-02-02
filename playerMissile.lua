@@ -9,6 +9,7 @@ function playerMissile:new(x, y, angle)
     self.v_y = nil
     self.boost = true
     self.gravity = gh/5000
+    self.dead = false
 end
 
 function playerMissile:draw()
@@ -16,6 +17,10 @@ function playerMissile:draw()
 end
 
 function playerMissile:update(dt)
+    if input:pressed('detonate') then
+      table.insert (listOfExplosions, Explosion(self.x, self.y))
+      self.dead = true
+    end
     if input:released('launch') then 
       self.v_x = (self.speed * cos * dt)
       self.v_y = (self.speed * sin * dt)
@@ -26,7 +31,7 @@ function playerMissile:update(dt)
       sin = math.sin(self.angle)
       self.x = self.x + self.speed * cos * dt
       self.y = self.y + self.speed * sin * dt
-      self.speed = self.speed + scale
+      self.speed = self.speed + scale * 0.75
     end
     if self.boost == false then
       self.x = self.x + self.v_x
