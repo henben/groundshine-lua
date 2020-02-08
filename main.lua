@@ -26,7 +26,7 @@ function love.load()
 end
 
 function love.update(dt)
-  Timer.update(dt)
+  --Timer.update(dt)
   player:update(dt)
   for i,v in ipairs(listOfMissiles) do
         v:update(dt)
@@ -37,7 +37,9 @@ function love.update(dt)
   end
   for i,v in ipairs(listOfExplosions) do
         v:update(dt)
-        Timer.after(1, function() table.remove(listOfExplosions, i) end)
+        if v.dead then
+          table.remove(listOfExplosions, i)
+        end
   end
 end
 
