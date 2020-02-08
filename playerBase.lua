@@ -17,7 +17,7 @@ function playerBase:update(dt)
   self.mousey = love.mouse.getY()/scale
   print (self.mousex, self.mousey)
   self.angle = findRotation(self.x,self.y,self.mousex,self.mousey)
-  if input:pressed('launch') then 
+  if input:pressed('launch') and ((next(listOfMissiles)) == nil) then 
     table.insert (listOfMissiles, playerMissile(self.x + 2*self.w*math.cos(self.angle), self.y + 2*self.w*math.sin(self.angle), self.angle))
   end
 end
@@ -32,7 +32,6 @@ end
 
 function playerBase:draw()
     love.graphics.circle('line', self.x, self.y, self.w)
-    love.graphics.setLineWidth( 2 )
     love.graphics.line(self.x, self.y, self.x + 2*self.w*math.cos(self.angle), self.y + 2*self.w*math.sin(self.angle))
     --love.graphics.setLineWidth( 1 )
     --love.graphics.line(self.x, self.y, self.mousex, self.mousey)
