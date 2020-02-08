@@ -6,8 +6,6 @@ function playerMissile:new(x, y, angle)
     -- store initial x & y 
     self.initial_x = self.x
     self.initial_y = self.y
-    --self.end_boost_x = nil
-    --self.end_boost_y = nil
 
     self.angle = angle
     self.speed = gh/40
@@ -18,12 +16,14 @@ function playerMissile:new(x, y, angle)
     self.launched = false
     self.gravity = gh/5000
     self.dead = false
+    self.flight_distance = nil
 end
 
 function playerMissile:draw()
     love.graphics.circle('fill', self.x, self.y, gw/200)
     if self.boost then
       --draw the missile trail while boosting
+      --self.flight_distance = getDistance(self.initial_x, self.initial_y, self.x, self.y)
       love.graphics.line(self.initial_x, self.initial_y, self.x, self.y)
     end
 end
@@ -38,7 +38,7 @@ function playerMissile:update(dt)
       self.v_y = (self.speed * sin * dt)
       self.boost = false
       self.launched = true
-      -- draw a persistent trail
+      -- create a separate missile trail object
       table.insert (listOfTrails, missileTrail(self.initial_x, self.initial_y, self.x, self.y))
     end
     if self.boost == true then
@@ -53,4 +53,15 @@ function playerMissile:update(dt)
       self.v_y = self.v_y + self.gravity
       self.y = self.y + self.v_y
     end
+end
+
+function getDistance(x1, y1, x2, y2)
+  local horizontal_distance = x1 - x2
+  local vertical_distance = y1 - y2
+  --Both of these work
+  local a = horizontal_distance ^2
+  local b = vertical_distance ^2
+  local c = a + b
+  local distance = math.sqrt(c)
+  return distance
 end
