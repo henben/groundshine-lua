@@ -14,7 +14,7 @@ function playerMissile:new(x, y, angle)
     self.v_y = nil
     self.boost = true
     self.launched = false
-    self.gravity = gh/5000
+    self.gravity = gh/8000
     self.dead = false
     self.flight_distance = nil
 end

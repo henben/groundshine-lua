@@ -1,6 +1,8 @@
 This is a game that is intended to be like the classic Missile Command but with more player control over individual missiles,
 and missile 'physics'.
 
+![Early Groundshine prototype](groundshine.gif)
+
 The eventual goal is for the game to run on the PlayDate console. I don't have access to the PlayDate SDK yet, so
 I'm implementing the game using the Lua [Love](https://love2d.org) framework, which I hope is similar to the PlayDate's
 Lua support.
