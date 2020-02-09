@@ -40,7 +40,6 @@ fallout.
 
 ## TODO
 
-* Fix tweening of explosions
 * Add launch sound and explosion sound
 * Make explosions and missiles physics objects for collision detection?
 * Add enemies and collision detection
@@ -55,3 +54,4 @@ fallout.
 ## DONE
 
 * Missile trails (lines)
+* Explosion tweening fixed and added screen flash
