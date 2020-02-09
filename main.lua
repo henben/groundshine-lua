@@ -1,7 +1,7 @@
 io.stdout:setvbuf("no")
 
 up = 1.5 * math.pi
-scale = 3
+scale = 3 -- default res is 400x240, this scaling factor is used to upscale the game
 
 function love.load()
     love.graphics.setDefaultFilter('nearest')
@@ -14,6 +14,7 @@ function love.load()
     require "missileTrail"
     Input = require 'libraries/Input'
     Timer = require 'libraries/timer'
+   -- Camera = require 'libraries/camera'
     
     player = playerBase()
     listOfMissiles = {}

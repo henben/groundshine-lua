@@ -11,15 +11,17 @@ To prevent the game window being tiny, it is currently scaled up.
 Another limitation I'm going to adopt is drawing all the game graphics using Love API calls, with no pre-drawn sprite images
 for a retro vector graphics look.
 
-== To run ==
+## To run 
 
-You should be able to run this in LÖVE 11.3. Not packaging it as a love file or executable as it has no entertainment value yet.
+You should be able to run this in LÖVE 11.3. I'm not bothering to package it as a .love file or executable, since it has no entertainment value yet.
 
-== Status ==
+## Status
 
-Player can aim and launch missiles with mouse and space (hold down to boost), make missiles explode with z, explosions disappear.
+Player can aim and launch missiles with mouse and space (hold down to boost), make missiles explode with z, explosions disappear after a second.
 
-== Detailed game design document ==
+Missiles leave trails.
+
+## Detailed game design document 
 
 You launch missiles from a base to shoot down incoming bombers, enemy bombs, enemy ICBMs and other enemies. Unlike in Missile Command and most of its
 clones, you don't simply click or tap where the missile should go. 
@@ -36,13 +38,20 @@ Instead of a score you have a counter showing how many people are still alive in
 or from enemy weapons) kill lots of people, bombers/missiles crashing into the city cause a few casualties. Perhaps model radioactive
 fallout.
 
-== TODO ==
+## TODO
 
-* Add missile trails (first line then try particle effects)
-* Add limited boost time
-* Add extra particle 'smoke' around base at launch
+* Fix tweening of explosions
+* Add launch sound and explosion sound
+* Make explosions and missiles physics objects for collision detection?
 * Add enemies and collision detection
-* Camera zooms out as missile gets higher to increase play area
+* Draw missiles as polygons
+* Better missile trails (try particle effects)
+* Limit boost time?
+* Add extra particle 'smoke' around base at launch
+* Camera zooms out as missile gets further from base to increase play area?
+* Radar view of threats offscreen
 * Explosion is divided into two zones, one that vaporises enemies, one that damages them (bombers crash, bombs diverted or fail to detonate?)
 
+## DONE
 
+* Missile trails (lines)
