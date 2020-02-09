@@ -4,14 +4,16 @@ function Explosion:new(x,y)
   self.flash = true
   self.x = x
   self.y = y
-  self.radius = 0.1
+  self.radius = gw/400
   self.dead = false
   self.Timer = require 'libraries/timer'
   self.decayTimer = Timer.new()
  -- self.flashTimer = Timer.new()
-  shrink = function () self.decayTimer:tween(0.9, self, {radius = 0.1}, 'in-out-quad', function() self.dead = true end) end
+  sfxExplosion:stop()
+  sfxExplosion:play()
+  shrink = function () self.decayTimer:tween(0.9, self, {radius = gw/400}, 'in-out-quad', function () self.dead = true end) end
   self.decayTimer:after(0.1, function () self.flash = false end)
-  self.decayTimer:tween(0.2, self, {radius = 10}, 'out-circ', shrink)
+  self.decayTimer:tween(0.2, self, {radius = gw/40}, 'out-circ', shrink)
 end
 
 function Explosion:update(dt)

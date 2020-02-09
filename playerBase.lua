@@ -16,6 +16,7 @@ function playerBase:update(dt)
   self.angle = findRotation(self.x,self.y,self.mousex,self.mousey)
   if input:pressed('launch') and ((next(listOfMissiles)) == nil) then 
     table.insert (listOfMissiles, playerMissile(self.x + 2*self.w*math.cos(self.angle), self.y + 2*self.w*math.sin(self.angle), self.angle))
+    sfxBoost:play()
   end
 end
 

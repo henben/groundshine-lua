@@ -33,6 +33,7 @@ function playerMissile:update(dt)
       self.dead = true
     end
     if input:released('launch') and (self.launched == false) then 
+      sfxBoost:stop()
       self.v_x = (self.speed * cos * dt)
       self.v_y = (self.speed * sin * dt)
       self.boost = false
@@ -45,7 +46,7 @@ function playerMissile:update(dt)
       sin = math.sin(self.angle)
       self.x = self.x + self.speed * cos * dt
       self.y = self.y + self.speed * sin * dt
-      self.speed = self.speed + scale * 0.75
+      self.speed = self.speed + gh/300
     end
     if self.boost == false then
       self.x = self.x + self.v_x

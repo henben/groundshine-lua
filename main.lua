@@ -1,12 +1,15 @@
+-- print to console while game is running
 io.stdout:setvbuf("no")
 
 up = 1.5 * math.pi
 scale = 3 -- default res is 400x240, this scaling factor is used to upscale the game
 
 function love.load()
+    -- retro look
     love.graphics.setDefaultFilter('nearest')
-    love.graphics.setLineStyle( 'rough' )
+    --love.graphics.setLineStyle( 'rough' )
     
+    -- load libraries and objects
     Object = require "libraries/classic"
     require "playerBase"
     require "playerMissile"
@@ -16,13 +19,25 @@ function love.load()
     Timer = require 'libraries/timer'
    -- Camera = require 'libraries/camera'
     
+   -- create initial game objects and tables to hold them
     player = playerBase()
     listOfMissiles = {}
     listOfExplosions = {}
     listOfTrails = {}
+
+    -- audio
+    sfxBackground = love.audio.newSource("sounds/Melt-Down_Looping.mp3", "stream")
+    sfxBackground:setLooping(true)
+    sfxBackground:setVolume(0.5)
+    sfxBackground:play()
+    sfxBoost = love.audio.newSource("sounds/Air-Lock-3.mp3", "static")
+    sfxExplosion = love.audio.newSource("sounds/Explosion7.mp3", "static")
+
+    -- scaling
     main_canvas = love.graphics.newCanvas(gw, gh)
     resize(scale)
     
+    -- initialise controls
     input = Input()
     input:bind('space', 'launch')
     input:bind('z', 'detonate')
