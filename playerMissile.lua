@@ -22,7 +22,6 @@ end
 function playerMissile:draw()
     love.graphics.circle('fill', self.x, self.y, gw/200)
     if self.boost then
-      --draw the missile trail while boosting
       --self.flight_distance = getDistance(self.initial_x, self.initial_y, self.x, self.y)
       love.graphics.line(self.initial_x, self.initial_y, self.x, self.y)
     end
