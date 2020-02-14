@@ -14,7 +14,7 @@ function playerMissile:new(x, y, angle)
     self.v_y = nil
     self.boost = true -- is the missile currently boosting?
     self.launched = false -- is there a missile currently launched? 
-    self.gravity = gh/8000
+    self.gravity = gh/10000
     self.dead = false
     self.flight_distance = nil
 end
