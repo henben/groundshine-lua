@@ -12,8 +12,8 @@ function playerMissile:new(x, y, angle)
     -- v_x and v_y are for ballistic movement after boost, not used yet
     self.v_x = nil
     self.v_y = nil
-    self.boost = true
-    self.launched = false
+    self.boost = true -- is the missile currently boosting?
+    self.launched = false -- is there a missile currently launched? 
     self.gravity = gh/8000
     self.dead = false
     self.flight_distance = nil
@@ -31,6 +31,9 @@ function playerMissile:update(dt)
     if input:pressed('detonate') then
       table.insert (listOfExplosions, Explosion(self.x, self.y))
       self.dead = true
+      if self.boost == true then
+        table.insert (listOfTrails, missileTrail(self.initial_x, self.initial_y, self.x, self.y))
+      end
     end
     if input:released('launch') and (self.launched == false) then 
       sfxBoost:stop()
