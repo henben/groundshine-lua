@@ -13,7 +13,7 @@ function Explosion:new(x,y)
   sfxExplosion:play()
   shrink = function () self.decayTimer:tween(0.9, self, {radius = gw/400}, 'in-out-quad', function () self.dead = true end) end
   self.decayTimer:after(0.1, function () self.flash = false end)
-  self.decayTimer:tween(0.2, self, {radius = gw/40}, 'out-circ', shrink)
+  self.decayTimer:tween(0.2, self, {radius = gw/10}, 'out-circ', shrink)
 end
 
 function Explosion:update(dt)
@@ -22,7 +22,7 @@ function Explosion:update(dt)
 end
 
 function Explosion:draw()
-    love.graphics.circle('fill', self.x, self.y, self.radius * scale)
+    love.graphics.circle('fill', self.x, self.y, self.radius)
     if self.flash then
     love.graphics.setBackgroundColor( 1, 1, 1, 1 )
     else
