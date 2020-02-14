@@ -30,6 +30,7 @@ end
 function playerMissile:update(dt)
     if input:pressed('detonate') then
       table.insert (listOfExplosions, Explosion(self.x, self.y))
+      sfxBoost:stop()
       self.dead = true
       if self.boost == true then
         table.insert (listOfTrails, missileTrail(self.initial_x, self.initial_y, self.x, self.y))
@@ -61,7 +62,6 @@ end
 function getDistance(x1, y1, x2, y2)
   local horizontal_distance = x1 - x2
   local vertical_distance = y1 - y2
-  --Both of these work
   local a = horizontal_distance ^2
   local b = vertical_distance ^2
   local c = a + b

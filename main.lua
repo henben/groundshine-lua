@@ -28,7 +28,7 @@ function love.load()
     -- audio
     sfxBackground = love.audio.newSource("sounds/Melt-Down_Looping.mp3", "stream")
     sfxBackground:setLooping(true)
-    sfxBackground:setVolume(0.5)
+    sfxBackground:setVolume(0.2)
     sfxBackground:play()
     sfxBoost = love.audio.newSource("sounds/Air-Lock-3.mp3", "static")
     sfxExplosion = love.audio.newSource("sounds/Explosion7.mp3", "static")
