@@ -15,14 +15,15 @@ function love.load()
     require "playerMissile"
     require "Explosion"
     require "missileTrail"
+    stage = require "rooms/Stage"
     Input = require 'libraries/Input'
     Timer = require 'libraries/timer'
+    player = playerBase()
    -- Camera = require 'libraries/camera'
   
-    current_room = nil
+    current_room = Stage
   
    -- create initial game objects and tables to hold them
-    player = playerBase()
     listOfMissiles = {}
     listOfExplosions = {}
     listOfTrails = {}
