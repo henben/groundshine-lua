@@ -11,14 +11,14 @@ function love.load()
     
     -- load libraries and objects
     Object = require "libraries/classic"
-    require "playerBase"
-    require "playerMissile"
+    require "PlayerBase"
+    require "PlayerMissile"
     require "Explosion"
-    require "missileTrail"
+    require "MissileTrail"
     stage = require "rooms/Stage"
     Input = require 'libraries/Input'
     Timer = require 'libraries/timer'
-    player = playerBase()
+    player = PlayerBase()
    -- Camera = require 'libraries/camera'
   
     current_room = Stage

@@ -1,6 +1,6 @@
-playerMissile = Object:extend()
+PlayerMissile = Object:extend()
 
-function playerMissile:new(x, y, angle)
+function PlayerMissile:new(x, y, angle)
     self.x = x
     self.y = y
     -- store initial x & y 
@@ -19,7 +19,7 @@ function playerMissile:new(x, y, angle)
     self.flight_distance = nil
 end
 
-function playerMissile:draw()
+function PlayerMissile:draw()
     love.graphics.circle('fill', self.x, self.y, gw/200)
     if self.boost then
       --self.flight_distance = getDistance(self.initial_x, self.initial_y, self.x, self.y)
@@ -27,13 +27,13 @@ function playerMissile:draw()
     end
 end
 
-function playerMissile:update(dt)
+function PlayerMissile:update(dt)
     if input:pressed('detonate') then
       table.insert (listOfExplosions, Explosion(self.x, self.y))
       sfxBoost:stop()
       self.dead = true
       if self.boost == true then
-        table.insert (listOfTrails, missileTrail(self.initial_x, self.initial_y, self.x, self.y))
+        table.insert (listOfTrails, MissileTrail(self.initial_x, self.initial_y, self.x, self.y))
       end
     end
     if input:released('launch') and (self.launched == false) then 
@@ -43,7 +43,7 @@ function playerMissile:update(dt)
       self.boost = false
       self.launched = true
       -- create a separate missile trail object
-      table.insert (listOfTrails, missileTrail(self.initial_x, self.initial_y, self.x, self.y))
+      table.insert (listOfTrails, MissileTrail(self.initial_x, self.initial_y, self.x, self.y))
     end
     if self.boost == true then
       cos = math.cos(self.angle)

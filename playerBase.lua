@@ -1,6 +1,6 @@
-playerBase = Object:extend()
+PlayerBase = Object:extend()
 
-function playerBase:new()
+function PlayerBase:new()
   self.x = gw/2
   self.y = gh
   self.w = gw/40
@@ -10,17 +10,17 @@ function playerBase:new()
   --self.turn_speed = 0.1
 end
 
-function playerBase:update(dt)
+function PlayerBase:update(dt)
   self.mousex = love.mouse.getX()/scale
   self.mousey = love.mouse.getY()/scale
   self.angle = findRotation(self.x,self.y,self.mousex,self.mousey)
   if input:pressed('launch') and ((next(listOfMissiles)) == nil) then 
-    table.insert (listOfMissiles, playerMissile(self.x + 2*self.w*math.cos(self.angle), self.y + 2*self.w*math.sin(self.angle), self.angle))
+    table.insert (listOfMissiles, PlayerMissile(self.x + 2*self.w*math.cos(self.angle), self.y + 2*self.w*math.sin(self.angle), self.angle))
     sfxBoost:play()
   end
 end
 
-function playerBase:draw()
+function PlayerBase:draw()
     love.graphics.circle('line', self.x, self.y, self.w)
     love.graphics.line(self.x, self.y, self.x + 2*self.w*math.cos(self.angle), self.y + 2*self.w*math.sin(self.angle))
 end
