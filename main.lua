@@ -15,18 +15,22 @@ function love.load()
     require "PlayerMissile"
     require "Explosion"
     require "MissileTrail"
-    stage = require "rooms/Stage"
+    require "Bomber"
+    Physics = require "libraries/windfield"
     Input = require 'libraries/Input'
     Timer = require 'libraries/timer'
     player = PlayerBase()
    -- Camera = require 'libraries/camera'
   
-    current_room = Stage
+    world = Physics.newWorld(0, 0, true)
+    world:addCollisionClass('Explosion')
+    world:addCollisionClass('Bomber')
   
    -- create initial game objects and tables to hold them
     listOfMissiles = {}
     listOfExplosions = {}
     listOfTrails = {}
+    listOfEnemies = {}
 
     -- audio
     sfxBackground = love.audio.newSource("sounds/Melt-Down_Looping.mp3", "stream")
@@ -44,17 +48,77 @@ function love.load()
     input = Input()
     input:bind('space', 'launch')
     input:bind('z', 'detonate')
+
+    bomber_timer = 0
+    bomber_delay = 5
+
+    addBomber()
 end
 
 function love.update(dt)
-  if current_room then current_room:update(dt) end
+  world:update(dt)
+  player:update(dt)
+  for i,v in ipairs(listOfMissiles) do
+        v:update(dt)
+        if v.dead then
+            --Remove it from the list
+            table.remove(listOfMissiles, i)
+        end
+  end
+  for i,v in ipairs(listOfExplosions) do
+        v:update(dt)
+        if v.dead then
+          --v.collider = nil
+          table.remove(listOfExplosions, i)
+        end
+  end
+  for i,v in ipairs(listOfEnemies) do
+      v:update(dt)
+      if v.dead then
+        --v.collider = nil
+        table.remove(listOfEnemies, i)
+      end
+  end
+  bomber_timer = bomber_timer + dt
+  if bomber_timer > bomber_delay then
+    addBomber()
+    bomber_timer = 0
+  end
 end
 
 function love.draw()
-  if current_room then current_room:draw() end
+  love.graphics.setCanvas(main_canvas)
+  love.graphics.clear()
+  love.graphics.setLineStyle('smooth')
+  love.graphics.setLineWidth( 4 )
+  player:draw()
+  love.graphics.setLineStyle('rough')
+  love.graphics.setLineWidth( 2 )
+  for i,v in ipairs(listOfMissiles) do
+    v:draw()
+  end
+  for i,v in ipairs(listOfExplosions) do
+    v:draw()
+  end
+  for i,v in ipairs(listOfEnemies) do
+    v:draw()
+  end
+  for i,v in ipairs(listOfTrails) do
+    v:draw()
+  end
+  love.graphics.setCanvas()
+  love.graphics.setColor(255, 255, 255, 255)
+  love.graphics.setBlendMode('alpha', 'premultiplied')
+  love.graphics.draw(main_canvas, 0, 0, 0, sx, sy)
+  love.graphics.setBlendMode('alpha')
 end
 
 function resize(s)
     love.window.setMode(s*gw, s*gh) 
     sx, sy = s, s
+end
+
+function addBomber()
+  table.insert (listOfEnemies, Bomber() )
+  return true
 end

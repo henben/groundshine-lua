@@ -6,19 +6,20 @@ function Explosion:new(x,y)
   self.y = y
   self.radius = gw/400
   self.dead = false
-  self.Timer = require 'libraries/timer'
+  --self.Timer = require 'libraries/timer'
   self.decayTimer = Timer.new()
- -- self.flashTimer = Timer.new()
   sfxExplosion:stop()
   sfxExplosion:play()
-  shrink = function () self.decayTimer:tween(0.9, self, {radius = gw/400}, 'in-out-quad', function () self.dead = true end) end
+  shrink = function () self.decayTimer:tween(0.9, self, {radius = gw/400}, 'in-out-quad', self:die()) end
   self.decayTimer:after(0.1, function () self.flash = false end)
   self.decayTimer:tween(0.2, self, {radius = gw/10}, 'out-circ', shrink)
+  self.collider = world:newCircleCollider(self.x, self.y, gw/10)
+  self.collider:setObject(self)
+  self.collider:setCollisionClass('Explosion')
 end
 
 function Explosion:update(dt)
   self.decayTimer:update(dt)
- -- self.flashTimer:update(dt)
 end
 
 function Explosion:draw()
@@ -28,4 +29,9 @@ function Explosion:draw()
     else
     love.graphics.setBackgroundColor( 0, 0, 0, 0 )
     end
+end
+
+function Explosion:die()
+  self.dead = true
+  self.collider:destroy()
 end
