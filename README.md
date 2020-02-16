@@ -42,7 +42,7 @@ fallout.
 
 ## TODO
 
-* Correctly handle detonation during boost phase
+
 * Make explosions and missiles physics objects for collision detection?
 * Add enemies and collision detection
 * Draw missiles as polygons
@@ -55,6 +55,7 @@ fallout.
 
 ## DONE
 
+* Correctly handle detonation during boost phase
 * Missile trails (lines)
 * Explosion tweening fixed and added screen flash
 * Launch sound, explosion sound and background
