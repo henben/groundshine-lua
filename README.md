@@ -43,8 +43,8 @@ fallout.
 ## TODO
 
 
-* Make explosions and missiles physics objects for collision detection?
-* Add enemies and collision detection
+* Make missiles physics objects 
+* Enemies drop bombs
 * Draw missiles as polygons
 * Better missile trails (try particle effects)
 * Limit boost time?
@@ -55,6 +55,7 @@ fallout.
 
 ## DONE
 
+* Add enemies and collision detection
 * Correctly handle detonation during boost phase
 * Missile trails (lines)
 * Explosion tweening fixed and added screen flash
